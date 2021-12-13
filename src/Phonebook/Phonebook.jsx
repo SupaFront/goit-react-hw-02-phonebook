@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Form from '../Form'
 import ContactList from "../ContactList";
 import FilterList from "../FilterList";
-
+import styles from './Phonebook.module.css'
 
 export default class Phonebook extends Component {
 
@@ -19,14 +19,14 @@ export default class Phonebook extends Component {
 
   addContact = contact => {
     if (this.state.contacts.some(item => item.name.toLowerCase() === contact.name.toLowerCase())) {
-      alert('This contact is already exist!! Try one more time, please!');
+      alert('This contact is already exist!! Try one more time, 4ort');
       return;
     }
-    this.setState(prevState => ({ contacts: [...prevState.contacts, { ...contact, id: nanoid() }] }))
+    return this.setState(prevState => ({ contacts: [...prevState.contacts, { ...contact, id: nanoid() }] }))
   }
   removeContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.filter(contact => contact.id !== contactId)
+     this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId)
     }));
   }
 
@@ -47,12 +47,15 @@ export default class Phonebook extends Component {
 
   render() {
     const showContacts = this.getFilteredContacts();
-    const { fiter } = this.state;
-    const { contacts, removeContact, onFilterChange} = this;
-    return <> <Form></Form>
-          <FilterList filter={filter} onFilterChange={onFilterChange}/>
+    const { contacts, filter } = this.state;
+    const {  removeContact, onFilterChange, addContact} = this;
+    return <>
+      <h2 className={styles.title}>Phonebook</h2>
+      <Form addContact={addContact}></Form>
+      <FilterList filter={filter} onFilterChange={onFilterChange} />
+      <h2 className={styles.title}>Phonebook</h2>
           <ContactList contact={showContacts}
-          removeContact={()=>removeContact()}></ContactList>
+          removeContact={removeContact}></ContactList>
           </>
     }
 }
