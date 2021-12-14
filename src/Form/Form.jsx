@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from './Form.module.css';
+import PropTypes from 'prop-types';
 
 const initialState = {
     number: '',
@@ -53,4 +54,7 @@ export default class Form extends Component{
 
     }
 
+}
+Form.propTypes = {
+    addContact: PropTypes.func.isRequired
 }

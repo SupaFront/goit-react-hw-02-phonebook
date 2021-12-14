@@ -1,4 +1,5 @@
-import styles from "./ContactList.module.css"
+import styles from "./ContactList.module.css";
+import PropTypes from 'prop-types';
 
 export default function ContactList({ contact, removeContact }) {
        
@@ -7,4 +8,15 @@ export default function ContactList({ contact, removeContact }) {
                 </ul>
         
     
+}
+
+ContactList.propTypes = {
+    contact: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.idRequired,
+            number: PropTypes.string.isRequired
+        })
+    ),
+    removeContact: PropTypes.func.isRequired
 }

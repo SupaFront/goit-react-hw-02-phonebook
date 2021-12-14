@@ -31,9 +31,11 @@ export default class Phonebook extends Component {
   }
 
   getFilteredContacts() {
-    return this.state.contacts.filter(contact =>
+    if (!this.state.filter) {
+      return this.state.contacts.filter(contact =>
         contact.name.toLowerCase().includes(this.state.filter.toLowerCase()),
       )
+    }
   }
     
 
