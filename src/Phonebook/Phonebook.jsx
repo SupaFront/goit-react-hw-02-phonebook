@@ -31,11 +31,14 @@ export default class Phonebook extends Component {
   }
 
   getFilteredContacts() {
-    if (!this.state.filter) {
-      return this.state.contacts.filter(contact =>
+    const { filter, contacts } = this.state;
+    if (!filter) {
+      return contacts
+    }
+      return contacts.filter(contact =>
         contact.name.toLowerCase().includes(this.state.filter.toLowerCase()),
       )
-    }
+  
   }
     
 
@@ -48,15 +51,16 @@ export default class Phonebook extends Component {
 
 
   render() {
-    const showContacts = this.getFilteredContacts();
-    const { contacts, filter } = this.state;
+    const contacts = this.getFilteredContacts();
+  
+    const { filter } = this.state;
     const {  removeContact, onFilterChange, addContact} = this;
     return <>
       <h2 className={styles.title}>Phonebook</h2>
       <Form addContact={addContact}></Form>
       <FilterList filter={filter} onFilterChange={onFilterChange} />
       <h2 className={styles.title}>Phonebook</h2>
-          <ContactList contact={showContacts}
+          <ContactList contact={contacts}
           removeContact={removeContact}></ContactList>
           </>
     }
